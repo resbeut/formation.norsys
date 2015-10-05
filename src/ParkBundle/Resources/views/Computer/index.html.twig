@@ -1,0 +1,27 @@
+{%  extends '::base.html.twig' %}
+
+
+{% block title %}{{ parent() }} Liste ordinateurs{% endblock %}
+
+{% block body %}
+
+
+
+<TABLE border="1">
+    <tr><th>N°</th><th>Nom</th><th>Adresse IP</th><th>Type</th><th>OS</th><th>Dispo.</th></tr>
+{% for computer in computers %}
+    <tr>
+        <td>{{ computer.id }}</td>
+        <td>{{ computer.name }}</td>
+        <td>{{ computer.ip }}</td>
+        <td>{{ computer.type }}</td>
+        <td>{{ computer.OS }}</td>
+        <td>{{ computer.enabled }}</td>
+    </tr>
+    {%  else %}
+      <td> <td colspan="6">Pas de données </td> </tr>
+{%  endfor  %}
+</TABLE>
+
+
+{%  endblock %}
