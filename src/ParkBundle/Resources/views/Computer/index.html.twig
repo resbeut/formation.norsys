@@ -4,24 +4,19 @@
 {% block title %}{{ parent() }} Liste ordinateurs{% endblock %}
 
 {% block body %}
-
-{{ "now"|date("d/m/Y h:m:s") }}
-
-<TABLE border="1">
+<table class="table table-striped" >
     <tr><th>N°</th><th>Nom</th><th>Adresse IP</th><th>Type</th><th>OS</th><th>Dispo.</th></tr>
 {% for computer in computers %}
     <tr>
         <td>{{ computer.id }}</td>
-        <td>{{ computer.name }}</td>
+        <td>{{ computer.name|computer_name }}</td>
         <td>{{ computer.ip }}</td>
         <td>{{ computer.type }}</td>
         <td>{{ computer.OS }}</td>
-        <td>{{ computer.enabled }}</td>
+        <td>{{ computer.enabled|computer_status }}</td>
     </tr>
     {%  else %}
       <td> <td colspan="6">Pas de données </td> </tr>
 {%  endfor  %}
-</TABLE>
-
-
+</table>
 {%  endblock %}
