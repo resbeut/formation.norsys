@@ -1,22 +1,51 @@
-{%  extends '::base.html.twig' %}
+{% extends '::base.html.twig' %}
 
+{% block body -%}
+    <h1>Computer list</h1>
 
-{% block title %}{{ parent() }} Liste ordinateurs{% endblock %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Ip</th>
+                <th>Os</th>
+                <th>Type</th>
+                <th>Affectation</th>
+                <th>Enabled</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('computer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.ip }}</td>
+                <td>{{ entity.os }}</td>
+                <td>{{ entity.type }}</td>
+                <td>{{ entity.person }}</td>
+                <td>{{ entity.enabled  }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('computer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('computer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{% block body %}
-<table class="table table-striped" >
-    <tr><th>N°</th><th>Nom</th><th>Adresse IP</th><th>Type</th><th>OS</th><th>Dispo.</th></tr>
-{% for computer in computers %}
-    <tr>
-        <td>{{ computer.id }}</td>
-        <td>{{ computer.name|computer_name }}</td>
-        <td>{{ computer.ip }}</td>
-        <td>{{ computer.type }}</td>
-        <td>{{ computer.OS }}</td>
-        <td>{{ computer.enabled|computer_status }}</td>
-    </tr>
-    {%  else %}
-      <td> <td colspan="6">Pas de données </td> </tr>
-{%  endfor  %}
-</table>
-{%  endblock %}
+        <ul>
+        <li>
+            <a href="{{ path('computer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
