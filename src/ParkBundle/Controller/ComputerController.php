@@ -242,6 +242,18 @@ class ComputerController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
-        ;
+            ;
+    }
+
+
+    /**
+     * Deletes a Computer entity.
+     *
+     * @Route("/calcultor/{var1}/{var2}", name="calculator",requirements={"var1":"^\d+", "var2":"^\d+"} )
+     * @Template()
+     */
+    public function calculatorAction($var1, $var2)
+    {
+        return array( "result" => $this->get('park.calculator')->calcul($var1, $var2) );
     }
 }
